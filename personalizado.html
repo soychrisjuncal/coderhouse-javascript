@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MoodAr - Plan Personalizado</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+		<div class="contenedor">
+
+
+		<header class="header">
+
+
+			<div class="col-xs-12 col-md-12 col-xl-12">
+
+				
+		
+			
+			<nav class="navbar navbar-expand-lg navbar-dark bg-none justify-content-between" id="navbar">
+  				<a class="navbar-brand" href="index.html" ><img src="img/logo_moodAr.svg" class="header__logo"></a>
+  					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    					<span class="navbar-toggler-icon"></span>
+  					</button>
+  			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+   			 <div class="navbar-nav navbar-expand-lg navbar-dark bg-none" id="menus">
+      
+     			 <a class="nav-item nav-link hvr-underline-from-center"  id="nav" href="pages/turnos.html">Quienes Somos</a>
+       			 <a class="nav-item nav-link hvr-underline-from-center" id="nav" href="pages/saludvisual.html">Servicios</a>
+       			 <a class="nav-item nav-link hvr-underline-from-center" id="nav" href="pages/novedades.html">Contacto</a>
+        		
+    		</div>
+ 			 </div>
+			</nav>
+		</div>
+			
+
+
+
+
+
+
+		</header>
+
+		
+<section class="seccion1">
+	<div class="col-xs-12 col-md-12">
+
+		<div class="persoBloque1">
+		<h1>Elegí el servicio de mudanza que mas te convenga!</h1>
+
+		<p>Eligiendo cualquiera de nuestros combos o la opción personalizada podras elegir que servicios quieres adquirir a la hora de realizar tu mudanza y podras calcular los costos en vivo por medio de nuestro simulador</p>
+
+		<div class="persoImagen1">
+					<img src="img/index2.png">
+
+				</div>
+		</div>
+
+
+</div>
+
+</section>
+
+
+<section class="seccion2">
+
+	<div class="col-xs-12 col-md-12">
+
+<h2> Simulador de Costos MoodAr</h2>
+
+	<p id="datosUsuario"><!--En este párrafo se mostrará los datos del usuario--></p>
+	<p id="datosServicio"><!--En este párrafo se mostrará los servicios elegidos por el usuario--></p>
+
+<div class="form">
+
+
+<br>
+<input id="usuario" type="text" name="username" class="form-control" placeholder="Username o Usuario">
+<br>
+<input id="email" type="email" name="email" class="form-control" placeholder="Email">
+<br>
+<select class="form-genero" id="genero">
+     <option>Femenino/a</option>
+      <option>Masculino/a</option>
+     <option>No Binario/a</option>
+      <option>Otro/a/e</option>	
+   </select>
+<br>
+
+	<br>
+<input id="nombre" type="text" name="nombr-apellido" class="form-control" placeholder="Nombre y Apellido">
+<br>
+
+
+	
+<input id="dni" type="text" name="dni" class="form-control" placeholder="DNI">
+<br>
+
+
+
+<input id="domicilio" type="text" name="domicilio" class="form-control" placeholder="Domicilio (adonde realizar los servicios)">
+<br>
+
+											
+<input id="localidad" type="text" name="localidad" class="form-control" placeholder="Localidad">
+
+<br>
+
+											
+<input id="telefono" type="text" name="WhatsApp" class="form-control" placeholder="Ej. 1130540430">
+
+<br>
+
+<button id="boton" class="btn btn-success" type="reset" onclick="capturar();"> Ingresar Datos</button>
+
+</div>
+
+<h2><i>Elegí tu Plan</i></h2>
+
+	<div class="card" style="width: 18rem;height: 20rem;">
+  <div class="card-body">
+    <h5 id="card-title" class="card-title">Basic</h5>
+    
+    <p class="card-text"> - Flete completo (traslado y despacho)</p>
+    <p class="card-text2"> - <del>Pintura (techo y paredes)</del></p>
+     <p class="card-text3"> -<del>Diseño Interiores</del></p>
+    <p class="card-text4"> $7999 </p>
+    <button class="item-button btn btn-primary" onclick="mostrarPlanBasic();">AÑADIR AL CARRITO</button>
+    
+  </div>
+</div>
+
+
+<div class="card" style="width: 18rem;height: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Regular</h5>
+    
+   <p class="card-text"> - Flete completo (traslado y despacho)</p>
+    <p class="card-text2"> - Pintura (techo y paredes)</p>
+     <p class="card-text3"> - <del>Diseño Interiores</del> </p>
+    <p class="card-text4"> $16999 </p>
+    <p class="card-text5"> *Los valores de pintura y diseño de interiores son por ambientes</p>
+     <button id="monstrar-plan" class="item-button btn btn-primary" onclick="mostrarPlanRegular();">AÑADIR AL CARRITO</button>
+  </div>
+</div>
+
+
+<div class="card" style="width: 18rem;height: 20rem;">
+  <div class="card-body">
+    <h5  class="card-title">Full</h5>
+    
+    <p class="card-text"> - Flete completo (traslado y despacho)</p>
+    <p class="card-text2"> - Pintura (techo y paredes)</p>
+     <p class="card-text3"> - Diseño Interiores</p>
+    <p class="card-text4"> $28999 </p>
+    <p class="card-text5"> *Los valores de pintura y diseño de interiores son por ambientes</p>
+    <button class="item-button btn btn-primary" onclick="mostrarPlanFull();" >AÑADIR AL CARRITO</button>
+    
+  </div>
+</div>
+
+<br>
+
+
+	<br>
+ 
+	<button onclick="alerta()">Comenzar Simulador</button>
+<br>
+ 
+
+
+<label id="card-text">Servicio de Flete (Traslado y despacho)</label>
+	<input type="checkbox" id="toogle" class="myCheckbox">
+	<label class="toogle-track" for="toogle">
+		
+		<span class="toogle-track__indicator"></span>
+	</label>
+<br>
+
+<label>Pintura (techo y paredes)</label>
+	<input type="checkbox" id="toogle2">
+	<label class="toogle-track2" for="toogle2">
+		
+		<span class="toogle-track__indicator2"></span>
+	</label>
+
+<br>
+	<label>Diseño Interiores</label>
+	<input type="checkbox" id="toogle3">
+	<label class="toogle-track3" for="toogle3">
+		
+		<span class="toogle-track__indicator3"></span>
+	</label>
+
+<br>
+<label>Asegura tu Mudanza </label>
+	<input type="checkbox" id="toogle4">
+	<label class="toogle-track4" for="toogle4">
+		
+		<span class="toogle-track__indicator4"></span>
+	</label>
+
+</div>
+
+<br>
+
+<label for="price">Elija la cantidad de ambientes: </label>
+<input type="range" name="price" id="price" min="1" max="4" step="1" value="4">
+<output class="price-output" for="price"></output>
+<br>
+
+<div class="card" style="width: 55rem;">
+  <div class="card-body">
+    <h5 class="card-title">Su Presupuesto Total es</h5>
+     <h5 id="tarjeta" class="tarjeta-title2"></h5>
+    
+    <p id="tarjeta-text" class="tarjeta-text"> </p>
+    <p id="tarjeta-text2" class="tarjeta-text2"> </p>
+     <p id="tarjeta-text3" class="tarjeta-text3"> </p>
+    <p id="mostrar-total" class="tarjeta-text4"> </p>
+    <a href="#" class="card-link">Finalizar</a>
+    
+  </div>
+</div>
+
+
+
+
+
+		</section>
+
+
+<footer>
+			
+
+			<img src="img/logo_moodArBN.png" class="footer__logo"></a>
+			<p>Todos los derechos reservados &copy;</p>
+
+
+
+		</footer>
+
+
+</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+
+	<script src="app.js"></script>
+<!-- <script src="tienda.js"></script>	-->
+	<script src="datosTienda.js"></script>	
+
+	
+
+
+
+
+
+	
+</body>
+</html>

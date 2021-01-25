@@ -1,0 +1,8 @@
+
+
+
+var ejemplo = {
+    "nombre":"Jose",
+    "mail":"juncalcf@gmail.com",
+    "edad":31,
+   };
