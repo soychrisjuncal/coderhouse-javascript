@@ -204,20 +204,39 @@
 	</label>
 
 <br>
-<label>Asegura tu Mudanza </label>
-	<input type="checkbox" id="toogle4">
-	<label class="toogle-track4" for="toogle4">
-		
-		<span class="toogle-track__indicator4"></span>
-	</label>
 
-</div>
 
+<form action="#">
+      Elija la cantidad de ambientes:
+      <input type="range" id="ambiente" min=1 max=6>
+      <span id="ambientes">1</span>
+      <br>
+      
+  </form>
+
+
+  
+
+<!--
+
+<label for="ambientes">Elija la cantidad de ambientes: </label>
+<input type="range" name="ambientes" id="ambientes" min="1" max="6" step="1" value="1" oninput="ambiente()">
+<output id="ambientes-output" class="ambientes-output" for="ambientes">3</output>
 <br>
 
-<label for="price">Elija la cantidad de ambientes: </label>
-<input type="range" name="price" id="price" min="1" max="4" step="1" value="4">
-<output class="price-output" for="price"></output>
+-->
+
+<label>Obtener descuento 20%OFF</label>
+	<input type="checkbox" id="toogle4" onchange="javascript:mostrarInput()">
+	<label class="toogle-track4" for="toogle4"><span class="toogle-track__indicator4"></span></label>
+<div id="content" style="display: none;">
+   <input id="desc" type="text" name="desc" class="form-control" placeholder="Escribir CODIGO de descuento">
+<br>
+    <button id="aplicar-desc" class="item-button btn btn-primary" onclick="mostrarPlanRegular();">APLICAR DESCUENTO</button>
+ 
+  
+ </div>
+
 <br>
 
 <div class="card" style="width: 55rem;">
@@ -228,7 +247,8 @@
     <p id="tarjeta-text" class="tarjeta-text"> </p>
     <p id="tarjeta-text2" class="tarjeta-text2"> </p>
      <p id="tarjeta-text3" class="tarjeta-text3"> </p>
-    <p id="mostrar-total" class="tarjeta-text4"> </p>
+    <p id="mostrar-total1" class="tarjeta-text4"> </p>
+    <p id="mostrar-total2" class="tarjeta-text5"> </p>
     <a href="#" class="card-link">Finalizar</a>
     
   </div>

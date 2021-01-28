@@ -46,6 +46,10 @@ console.log(baseDatos);
 
 function mostrarPlanBasic() {
 
+  
+
+
+
 document.getElementById("toogle").checked = true;
 document.getElementById("toogle2").checked = false;
 document.getElementById("toogle3").checked = false;
@@ -53,7 +57,13 @@ document.getElementById("toogle3").checked = false;
 document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  document.getElementById("card-text").textContent + '</p>';;
 document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> - <del>Pintura (techo y paredes)</del></p>';
 document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> -<del>Diseño Interiores</del></p>';
-document.getElementById("mostrar-total").innerHTML = '<p id="mostrar-total" class="tarjeta-text4">' + " $ " + (valorBasic) + '</p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
+
+
+
 }
 
 function mostrarPlanRegular() {
@@ -65,7 +75,12 @@ document.getElementById("toogle3").checked = false;
 document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  document.getElementById("card-text").textContent + '</p>';;
 document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> - Pintura (techo y paredes)</p>';
 document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> -<del>Diseño Interiores</del></p>';
-document.getElementById("mostrar-total").innerHTML = '<p id="mostrar-total" class="tarjeta-text4">' + " $ " + (valorRegular) + '</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorRegular)  + '</p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
+
 }
 
 function mostrarPlanFull() {
@@ -77,7 +92,11 @@ document.getElementById("toogle3").checked = true;
 document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  document.getElementById("card-text").textContent + '</p>';;
 document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> - Pintura (techo y paredes)</p>';
 document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> - Diseño Interiores></p>';
-document.getElementById("mostrar-total").innerHTML = '<p id="mostrar-total" class="tarjeta-text4">' + " $ " + (valorFull) + '</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorFull) + '</p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
 
 }
 
@@ -90,22 +109,134 @@ document.getElementById("toogle3").checked = true;
 document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  document.getElementById("card-text").textContent + '</p>';;
 document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> - <del> Pintura (techo y paredes) <del></p>';
 document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> - Diseño Interiores></p>';
-document.getElementById("mostrar-total").innerHTML = '<p id="mostrar-total" class="tarjeta-text4">' + " $ " + (valorFull - valorPintura) + '</p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
 
 }
 
-function mostrarPersonalizadoFlete() {
+function mostrarPersonalizadoPintura1() {
 
-document.getElementById("toogle").checked = true;
+document.getElementById("toogle").checked = false;
+document.getElementById("toogle2").checked = true;
+document.getElementById("toogle3").checked = false;
+
+document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text"> - <del> Flete completo (traslado y despacho)<del> </p>';;
+document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> -  Pintura (techo y paredes) </p>';
+document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> - <del>  Diseño Interiores> <del> </p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
+
+}
+
+function mostrarPersonalizadoPintura2() {
+
+document.getElementById("toogle").checked = false;
+document.getElementById("toogle2").checked = true;
+document.getElementById("toogle3").checked = true;
+
+document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text"> - <del> Flete completo (traslado y despacho)<del> </p>';;
+document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> -  Pintura (techo y paredes) </p>';
+document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> - Diseño Interiores>  </p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
+
+}
+
+function mostrarPersonalizadoInteriores() {
+
+document.getElementById("toogle").checked = false;
 document.getElementById("toogle2").checked = false;
 document.getElementById("toogle3").checked = true;
 
-document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  document.getElementById("card-text").textContent + '</p>';;
-document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> - <del> Pintura (techo y paredes) <del></p>';
-document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> - Diseño Interiores></p>';
-document.getElementById("mostrar-total").innerHTML = '<p id="mostrar-total" class="tarjeta-text4">' + " $ " + (valorFull - valorPintura) + '</p>';
+document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text"> - <del> Flete completo (traslado y despacho)<del> </p>';;
+document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> - <del> Pintura (techo y paredes) <del> </p>';
+document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> - Diseño Interiores>  </p>';
+value =parseInt(document.getElementById('ambiente').value);
+
+cambioAmbientes();
+inicio();
+
 
 }
+
+function mostrarNinguno() {
+
+document.getElementById("toogle").checked = false;
+document.getElementById("toogle2").checked = false;
+document.getElementById("toogle3").checked = false;
+
+document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">  </p>';;
+document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> </p>';
+document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> </p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + "  " + '</p>';
+
+
+}
+
+
+  
+
+
+
+addEventListener('load',inicio,false);
+
+  function inicio()
+  {
+    document.getElementById('ambiente').addEventListener('click',cambioAmbientes,false);
+  }
+
+
+ function cambioAmbientes()
+  {    
+    document.getElementById('ambientes').innerHTML=document.getElementById('ambiente').value;
+
+  value = parseInt(document.getElementById('ambiente').value);
+
+var checkedFlete = checkboxFlete.checked;
+  var checkedPintura = checkboxPintura.checked;
+   var checkedInteriores = checkboxInteriores.checked;
+if(checkedFlete && !checkedPintura && !checkedInteriores){  
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorFlete) + '</p>';
+
+}else if (checkedFlete && checkedPintura && !checkedInteriores){
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorFlete + (valorPintura * value)) + '</p>';
+
+
+}else if (checkedFlete && checkedPintura && checkedInteriores) {
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorFlete + (valorPintura + valorInteriores) * value) + '</p>';
+
+
+}else if (checkedFlete && !checkedPintura && checkedInteriores) {
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorFlete) + (valorInteriores * value) + '</p>';
+
+}else if (!checkedFlete && checkedPintura && !checkedInteriores) {
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorPintura * value) + '</p>';
+
+}else if (!checkedFlete && checkedPintura && checkedInteriores) {
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((valorPintura + valorInteriores) * value) + '</p>';
+
+}else if (!checkedFlete && !checkedPintura && checkedInteriores) {
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (valorInteriores * value) + '</p>';
+} 
+}
+
+
+function mostrarInput() {
+        element = document.getElementById("content");
+        check = document.getElementById("toogle4");
+        if (check.checked) {
+            element.style.display='block';
+        }
+        else {
+            element.style.display='none';
+        }
+    }
 
 var valorFlete = parseInt(7999);
 var valorPintura = parseInt(14999);
@@ -127,6 +258,7 @@ checkboxPintura.addEventListener("change", validaCheckbox, false);
 var checkboxInteriores = document.getElementById('toogle3');
 checkboxInteriores.addEventListener("change", validaCheckbox, false);
 
+
 function validaCheckbox()
 {
   var checkedFlete = checkboxFlete.checked;
@@ -140,36 +272,14 @@ function validaCheckbox()
   	mostrarPlanFull();
   }else if (checkedFlete && !checkedPintura && checkedInteriores) {
   	mostrarPersonalizadoFlete();
-  }
+  }else if (!checkedFlete && checkedPintura && !checkedInteriores) {
+  	mostrarPersonalizadoPintura1();
+  }else if (!checkedFlete && checkedPintura && checkedInteriores) {
+  	mostrarPersonalizadoPintura2();
+  }else if (!checkedFlete && !checkedPintura && checkedInteriores) {
+  	mostrarPersonalizadoInteriores();
+    } else {
+      mostrarNinguno();
+   
 }
-
-/*
-	var mostrarFlete = document.getElementById("card-text").textContent;
-	document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  document.getElementById("card-text").textContent + '</p>';
-}else{
-
-document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' + " " + '</p>';
-
 }
-
-
-/*
-const button = event.target;
-  const item = button.closest('.card');
-
-  const itemTitle = item.querySelector('.card-title').textContent;
-  const itemText = item.querySelector('.card-text').textContent;
-  const itemText2 = item.querySelector('.card-text2').textContent;
-  const itemText3 = item.querySelector('.card-text3').textContent;
-  const itemPrice = item.querySelector('.card-text4').textContent;
-
- console.log(itemTitle + itemText +itemText2 + itemText3 + itemPrice);
-
-
- document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  item.querySelector('.card-text').innerHTML + '</p>';
- document.getElementById("tarjeta-text2").innerHTML = '<p id="tarjeta-text2" class="tarjeta-text2">' +  item.querySelector('.card-text2').innerHTML + '</p>';
- document.getElementById("tarjeta-text3").innerHTML = '<p id="tarjeta-text3" class="tarjeta-text3">' +  item.querySelector('.card-text3').innerHTML + '</p>';
- document.getElementById("tarjeta-text4").innerHTML = '<p id="tarjeta-text4" class="tarjeta-text4">' +  item.querySelector('.card-text4').innerHTML + '</p>';
-
-}
-*/
