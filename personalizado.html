@@ -3,16 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>MoodAr - Plan Personalizado</title>
+	<title>Document</title>
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-
 	<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
 
@@ -59,7 +60,7 @@
 		<div class="persoBloque1">
 		<h1>Elegí el servicio de mudanza que mas te convenga!</h1>
 
-		<p>Eligiendo cualquiera de nuestros combos o la opción personalizada podras elegir que servicios quieres adquirir a la hora de realizar tu mudanza y podras calcular los costos en vivo por medio de nuestro simulador</p>
+		<p>Seleccionando cualquiera de nuestros combos o la opción personalizada podras elegir que servicios quieres adquirir a la hora de realizar tu mudanza y podras calcular los costos en el momento por medio de nuestro simulador</p>
 
 		<div class="persoImagen1">
 					<img src="img/index2.png">
@@ -79,14 +80,28 @@
 
 <h2> Simulador de Costos MoodAr</h2>
 
-	<p id="datosUsuario"><!--En este párrafo se mostrará los datos del usuario--></p>
-	<p id="datosServicio"><!--En este párrafo se mostrará los servicios elegidos por el usuario--></p>
+<p>Si aun no tines una cuenta MoodAr, ingresa tu datos y <a type="button"  data-toggle="modal" data-target="#registroModal" href="">REGISTRATE</a>   .Si ya eres usuario <a type="button"  data-toggle="modal" data-target="#usuarioModal" href="">LOGUEATE</a></p>
 
-<div class="form">
+
+
+<!-- Modal de Registro -->
+<div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
 
 
 <br>
-<input id="usuario" type="text" name="username" class="form-control" placeholder="Username o Usuario">
+<input id="usuario" type="text" name="username" class="form-control" placeholder="Ingrese su numero de Usuario">
+<br>
+<input id="pass" type="password" name="pass" class="form-control" placeholder="Ingrese su contraseña">
 <br>
 <input id="email" type="email" name="email" class="form-control" placeholder="Email">
 <br>
@@ -118,15 +133,62 @@
 <br>
 
 											
-<input id="telefono" type="text" name="WhatsApp" class="form-control" placeholder="Ej. 1130540430">
+<input id="telefono" type="text" name="WhatsApp" class="form-control" placeholder="WhatsApp Ej. 1130540430">
 
 <br>
 
-<button id="boton" class="btn btn-success" type="reset" onclick="capturar();"> Ingresar Datos</button>
+
 
 </div>
 <br>
 <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="boton" class="btn btn-success" type="reset" onclick="capturar();">Registrarse</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de Log In -->
+<div class="modal fade" id="usuarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+
+
+<br>
+<input id="usuario" type="text" name="username" class="form-control" placeholder="Nombre de Usuario o Mail">
+<br>
+<input id="pass" type="text" name="pass" class="form-control" placeholder="Contraseña">
+<br>
+
+
+
+</div>
+<br>
+<br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="boton" class="btn btn-success" type="reset" onclick="capturar();">Iniciar Sesión</button>
+      </div>
+    </div>
+  </div>
+</div>
+	<p id="datosUsuario"><!--En este párrafo se mostrará los datos del usuario--></p>
+	<p id="datosServicio"><!--En este párrafo se mostrará los servicios elegidos por el usuario--></p>
+
+
 
 
 <h2><i>Elegí tu Plan</i></h2>
@@ -156,7 +218,7 @@
    <p class="card-text"> - Flete completo (traslado y despacho)</p>
     <p class="card-text2"> - Pintura (techo y paredes)</p>
      <p class="card-text3"> - <del>Diseño Interiores</del> </p>
-    <p class="card-text4"> $16999 </p>
+    <p class="card-text4"> $22998 </p>
     <p class="card-text5"> *Los valores de pintura y diseño de interiores son por ambientes</p>
      <button id="monstrar-plan" class="item-button btn btn-primary" onclick="mostrarPlanRegular();">AÑADIR AL CARRITO</button>
   </div>
@@ -170,7 +232,7 @@
     <p class="card-text"> - Flete completo (traslado y despacho)</p>
     <p class="card-text2"> - Pintura (techo y paredes)</p>
      <p class="card-text3"> - Diseño Interiores</p>
-    <p class="card-text4"> $28999 </p>
+    <p class="card-text4"> $29997 </p>
     <p class="card-text5"> *Los valores de pintura y diseño de interiores son por ambientes</p>
     <button class="item-button btn btn-primary" onclick="mostrarPlanFull();" >AÑADIR AL CARRITO</button>
     
@@ -191,7 +253,7 @@
 <br>
 
 <label id="card-text">Servicio de Flete (Traslado y despacho)</label>
-	<input type="checkbox" id="toogle" class="myCheckbox">
+	<input type="checkbox" id="toogle" class="myCheckbox" autocomplete="OFF">
 	<label class="toogle-track" for="toogle">
 		
 		<span class="toogle-track__indicator"></span>
@@ -199,7 +261,7 @@
 <br>
 
 <label>Pintura (techo y paredes)</label>
-	<input type="checkbox" id="toogle2">
+	<input type="checkbox" id="toogle2" autocomplete="OFF">
 	<label class="toogle-track2" for="toogle2">
 		
 		<span class="toogle-track__indicator2"></span>
@@ -207,7 +269,7 @@
 
 <br>
 	<label>Diseño Interiores</label>
-	<input type="checkbox" id="toogle3">
+	<input type="checkbox" id="toogle3" autocomplete="OFF">
 	<label class="toogle-track3" for="toogle3">
 		
 		<span class="toogle-track__indicator3"></span>
@@ -218,7 +280,7 @@
 
 <form action="#">
       Elija la cantidad de ambientes:
-      <input type="range" id="ambiente" min=1 max=6>
+      <input type="range" id="ambiente" min="1" max="6">
       <span id="ambientes"></span>
       <br>
       
@@ -228,10 +290,10 @@
   
 
 <label>Obtener descuento 20%OFF</label>
-	<input type="checkbox" id="toogle4" onchange="javascript:mostrarInput()">
+	<input type="checkbox" id="toogle4" autocomplete="OFF" onchange="javascript:mostrarInput()">
 	<label class="toogle-track4" for="toogle4"><span class="toogle-track__indicator4"></span></label>
 <div id="content" style="display: none;">
-   <input id="desc" type="text" name="desc" class="form-control" placeholder="Escribir CODIGO de descuento">
+   <input id="desc" type="text" name="desc" class="form-control" placeholder="Escribir CODIGO de descuento" autocomplete="OFF">
 <br>
     <button id="aplicar-desc" class="item-button btn btn-primary" onclick="aplicarDescuento();">APLICAR DESCUENTO</button>
 <br>
@@ -253,7 +315,7 @@
 
 <div class="card" style="width: 55rem;">
   <div class="card-body">
-    <h5 class="card-title">Su Presupuesto Total es</h5>
+    <h5 id="tarjeta-title" class="tarjeta-title">Su Presupuesto Total es</h5>
      <h5 id="tarjeta" class="tarjeta-title2"></h5>
     
     <p id="tarjeta-text" class="tarjeta-text"> </p>

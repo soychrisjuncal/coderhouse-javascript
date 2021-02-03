@@ -1,9 +1,10 @@
 function capturar () {
 //console.log ("capturado");
 
-function Persona (usuario,email,genero,nombre,dni,domicilio,localidad,telefono) {
+function Persona (usuario,contrasena,email,genero,nombre,dni,domicilio,localidad,telefono) {
 
 this.usuario= usuario;
+this.contrasena= contrasena;
 this.email= email;
 this.genero= genero;
 this.nombre= nombre;
@@ -14,6 +15,8 @@ this.telefono= telefono;
 }
 
 var usuarioCapturar = document.getElementById("usuario").value;
+//console.log(nombreCapturar);
+var contrasenaCapturar = document.getElementById("pass").value;
 //console.log(nombreCapturar);
 var emailCapturar = document.getElementById("email").value;
 //console.log(nombreCapturar);
@@ -30,9 +33,9 @@ var localidadCapturar = document.getElementById("localidad").value;
 var telefonoCapturar = document.getElementById("telefono").value;
 //console.log(nombreCapturar);
 
-nuevoUsuario= new Persona(usuarioCapturar,emailCapturar,generoCapturar,nombreCapturar,dniCapturar,domicilioCapturar,localidadCapturar,telefonoCapturar);
+nuevoUsuario = new Persona(usuarioCapturar,contrasenaCapturar,emailCapturar,generoCapturar,nombreCapturar,dniCapturar,domicilioCapturar,localidadCapturar,telefonoCapturar);
 
-console.log(nuevoUsuario);
+// console.log(nuevoUsuario);
 ingresarDato();
 }
 
@@ -40,18 +43,19 @@ var baseDatos = [];
 function ingresarDato (){
 baseDatos.push(nuevoUsuario);
 console.log(baseDatos);
+localStorage.setItem("Usuario", JSON.stringify(nuevoUsuario));
+var usuario = JSON.parse(localStorage.getItem("Usuario"));
+document.getElementById("tarjeta-title").innerHTML = '<h5 id="tarjeta-title" class="tarjeta-title">' + baseDatos[0].nombre + ",  " + 'Su Presupuesto Total es</h5>'
+
 
 }
 
 
-// function flete (servicio,preciosindesc,precioDesc,preciocondesc) {
 
-// this.servicio= "Flete completo (traslado y despacho)";
-// this.preciosindesc= valorFlete;
-// this.precioDesc= ((valorFlete * 20)/100) ;
-// this.preciocondesc= (preciosindesc - precioDesc);
+var flete = ["Flete completo (traslado y despacho)", valorFlete, valorDescFlete, valorFleteConDesc];
+var pintura = ["Pintura (techo y paredes)", valorPintura, valorDescPintura, valorPinturaConDesc];
+var interiores = ["Diseño Interiores", valorInteriores, valorDescInteriores, valorInteriores];
 
-// }
 
 
 function mostrarPlanBasic() {
@@ -88,7 +92,7 @@ document.getElementById("toogle").checked = true;
 document.getElementById("toogle2").checked = true;
 document.getElementById("toogle3").checked = false;
 
-document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  flete[0] + '</p>';;
+document.getElementById("tarjeta-text").innerHTML = '<p id="tarjeta-text" class="tarjeta-text">' +  flete[0] + '</p>';
 document.getElementById("tarjeta-text2").innerHTML = '  <p class="card-text2"> ' + pintura[0] + '</p>';
 document.getElementById("tarjeta-text3").innerHTML = ' <p class="card-text3"> -<del>' + interiores[0] + '</del></p>';
 
@@ -225,8 +229,15 @@ var valorDescInteriores = (((valorInteriores) * 20) / 100);
 var valorInterioresConDesc = ((valorInteriores) - valorDescInteriores);
 
 var checkedFlete = checkboxFlete.checked;
-  var checkedPintura = checkboxPintura.checked;
-   var checkedInteriores = checkboxInteriores.checked;
+var checkedPintura = checkboxPintura.checked;
+var checkedInteriores = checkboxInteriores.checked;
+
+
+
+const flete = ["Flete completo (traslado y despacho)", valorFlete, valorDescFlete, valorFleteConDesc];
+const pintura = ["Pintura (techo y paredes)", valorPintura, valorDescPintura, valorPinturaConDesc];
+const interiores = ["Diseño Interiores", valorInteriores, valorDescInteriores, valorInterioresConDesc];
+
 
  
   
@@ -235,45 +246,45 @@ if(checkedFlete && !checkedPintura && !checkedInteriores ){
 
 
 document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + flete[1] +'</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + valorDescFlete +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + valorFleteConDesc +'</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + flete[2] +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + flete[3] +'</p>';
 
 
 
 }else if (checkedFlete && checkedPintura && !checkedInteriores ){
-document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " +  (flete[1] + (pintura[1] * value)) +  '</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((valorDescPintura + valorDescFlete)) +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(valorPinturaConDesc + valorFleteConDesc) +'</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " +  (flete[1] + pintura[1]) +  '</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2])) +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(flete[3] + pintura[3]) +'</p>';
 
 
 }else if (checkedFlete && checkedPintura && checkedInteriores) {
-document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1]  + (pintura[1] + interiores[1]) * value) + '</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((valorDescPintura + valorDescFlete + valorDescInteriores)) +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(valorFleteConDesc + valorPinturaConDesc + valorInterioresConDesc) +'</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1]  + (pintura[1] + interiores[1])) + '</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2]+ interiores[2])) +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(flete[3] + pintura[3]+ interiores[3]) +'</p>';
 
 
 }else if (checkedFlete && !checkedPintura && checkedInteriores) {
-document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((flete[1]) + (interiores[1] * value)) + '</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((valorDescInteriores + valorDescFlete)) +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(valorInterioresConDesc + valorFleteConDesc) +'</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1]) + interiores[1] + '</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((flete[2] + interiores[2])) +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(flete[3] + interiores[3]) +'</p>';
 
 }else if (!checkedFlete && checkedPintura && !checkedInteriores) {
 
   
-document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (pintura[1] * value) + '</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt(valorDescPintura) +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(valorPinturaConDesc) +'</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + pintura[1] + '</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + pintura[2] +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + pintura[3]  +'</p>';
 
 }else if (!checkedFlete && checkedPintura && checkedInteriores) {
-document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((pintura[1] + interiores[1]) * value) + '</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((valorDescInteriores + valorDescPintura)) +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(valorInterioresConDesc + valorPinturaConDesc) +'</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (pintura[1] + interiores[1]) + '</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt(pintura[2] + interiores[2]) +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(pintura[3] + interiores[3]) +'</p>';
 
 
 }else if (!checkedFlete && !checkedPintura && checkedInteriores) {
-document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (interiores[1] * value) + '</p>';
-document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt(valorDescInteriores) +'</p>';
-document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(valorInterioresConDesc) +'</p>';
+document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + interiores[1] + '</p>';
+document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt(interiores[2]) +'</p>';
+document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(interiores[3]) +'</p>';
 } 
 
 aplicarDescuento();
@@ -355,11 +366,19 @@ mostrarTotalDesc.style.display = 'none';
 function mostrarInput() {
         element = document.getElementById("content");
         check = document.getElementById("toogle4");
+        mostrarDesc = document.getElementById("mostrar-total2");
+mostrarTotalDesc = document.getElementById("mostrar-total3");
+elementoError = document.getElementById("wrongCod");
         if (check.checked) {
             element.style.display='block';
         }
         else {
             element.style.display='none';
+            elementoError.style.display='block';
+
+mostrarDesc.style.display = 'none';
+mostrarTotalDesc.style.display = 'none';
+
         }
     }
 
@@ -462,11 +481,9 @@ var valorBasic = (valorFlete);
  var valorRegular = (valorFlete + valorPintura);
  var valorFull = (valorFlete + valorPintura + valorInteriores);
 
-var flete = ["Flete completo (traslado y despacho)", valorFlete, valorDescFlete, valorFleteConDesc];
-var pintura = ["Pintura (techo y paredes)", valorPintura, valorDescPintura, valorPinturaConDesc];
-var interiores = ["Diseño Interiores", valorInteriores, valorDescInteriores, valorInteriores];
 
 
+console.log(pintura[3])
 
 var checkboxFlete = document.getElementById('toogle');
 checkboxFlete.addEventListener("change", validaCheckbox, false);
