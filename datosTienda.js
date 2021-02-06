@@ -1,5 +1,11 @@
+
+
+// ESTA FUNCION CAPTURA EL REGISTRO DEL USUARIO.
+
 function capturar () {
-//console.log ("capturado");
+// console.log(e);
+
+//FUNCION CONSTRUCTORA DE UN OBJETO PERSONA PARA CREAR USUARIOS
 
 function Persona (usuario,contrasena,email,genero,nombre,dni,domicilio,localidad,telefono) {
 
@@ -39,29 +45,110 @@ nuevoUsuario = new Persona(usuarioCapturar,contrasenaCapturar,emailCapturar,gene
 ingresarDato();
 }
 
+//FUNCION PARA INGRESAR EL OBJETO USUARIO A UN ARRAY Y A UN LOCALSTORAGE
+
 var baseDatos = [];
+
 function ingresarDato (){
+
 baseDatos.push(nuevoUsuario);
 console.log(baseDatos);
 localStorage.setItem("Usuario", JSON.stringify(nuevoUsuario));
-var usuario = JSON.parse(localStorage.getItem("Usuario"));
-document.getElementById("tarjeta-title").innerHTML = '<h5 id="tarjeta-title" class="tarjeta-title">' + baseDatos[0].nombre + ",  " + 'Su Presupuesto Total es</h5>'
 
 
 }
 
+// UNA VEZ QUE SE REGISTRA EL USARIO DESAPARECE LA OPCION DE REGISTRO Y LOGIN
+
+if ( !localStorage.getItem("Usuario", JSON.stringify('Usuario'))) {
+  console.log("hola");
 
 
+  var mostrarRegistro= document.getElementById("registro");
+mostrarRegistro.style.display='block';
+
+var saludoUsuario= document.getElementById("saludoUsuario");
+saludoUsuario.style.display='none';
+
+
+
+
+
+  }else{
+
+
+ 
+
+ console.log("pepe");
+      var mostrarRegistro= document.getElementById("registro");
+mostrarRegistro.style.display='none';
+
+var saludoUsuario= document.getElementById("saludoUsuario");
+saludoUsuario.style.display='block';
+
+
+
+
+document.getElementById("tarjeta-title").innerHTML = '<h5 id="tarjeta-title" class="tarjeta-title">' + JSON.parse(localStorage.getItem("Usuario")).nombre + ",  " + 'Su Presupuesto Total es</h5>'
+
+document.getElementById("saludoUsuario").innerHTML = '<p id="saludoUsuario" >' + "Bienvenid@  " +  JSON.parse(localStorage.getItem("Usuario")).nombre + '</p>'
+document.getElementById("dropdownMenu2").innerHTML = '<button class="btn btn-secondary dropdown-toggle bg-none" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img id="logoUsuario" src="img/logoUsuario.png">' + JSON.parse(localStorage.getItem("Usuario")).nombre + '</button>'
+ 
+
+
+ const menuContenedor = document.getElementById('contenedorMenu')
+
+  let div = document.createElement('div')
+  div.classList.add('dropdown-menu')
+    div.innerHTML = ` <form class="px-4 py-3">
+    <div class="form-group">
+      <label for="exampleDropdownFormEmail1">Nombre</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).usuario }</p>
+    </div>
+    <div class="form-group">
+      <label for="exampleDropdownFormPassword1">Mail</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).usuario }</p>
+    </div>
+     <div class="form-group">
+      <label for="exampleDropdownFormPassword1">Servicio Elegido</label>
+      <p></p>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleDropdownFormPassword1">Total</label>
+      <p></p>
+    </div>
+    <button type="submit" class="btn btn-primary" style="display: none;">LOGUEATE</button>
+  </form>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#" style="display: none;>Eres Nuevo? REGISTRATE</a>
+ `
+menuContenedor.appendChild(div)
+ }
+
+
+
+var usuarioUsuario = JSON.parse(localStorage.getItem("Usuario")).usuario;
+var passUsuario = JSON.parse(localStorage.getItem("Usuario")).contrasena;
+
+
+var nombreUsuario = JSON.parse(localStorage.getItem("Usuario")).usuario;
+
+
+
+
+
+
+//ARRAYS QUE CONTIENEN EL NOMBRE DEL SERVICIO, EL VALOR NOMINAL Y LOS VALORES CON DESCUENTO
 var flete = ["Flete completo (traslado y despacho)", valorFlete, valorDescFlete, valorFleteConDesc];
 var pintura = ["Pintura (techo y paredes)", valorPintura, valorDescPintura, valorPinturaConDesc];
 var interiores = ["Diseño Interiores", valorInteriores, valorDescInteriores, valorInteriores];
 
 
 
+//CREE UNA FUNCION QUE SE EJECUTA CON UN EVENTO ON CLICK PARA CADA UNA DE LAS OPCIONES, TANTO LOS PLANES DE SERVICIO EN COMBO COMO LA OPCION PERSONALIZADA A TRAVES DE LOS INPUT CHECKBOX
+
 function mostrarPlanBasic() {
-
-  
-
 
 
 document.getElementById("toogle").checked = true;
@@ -77,13 +164,7 @@ cambioAmbientes();
 inicio();
 
 
-
- 
-
 }
-
-
-
 
 
 function mostrarPlanRegular() {
@@ -202,7 +283,7 @@ document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" cl
 
   
 
-
+//FUNCION DE LA INPUT RANGE QUE CAMBIA DE AMBIENTES, AQUI SE CALCULAN LOS VALORES NOMINALES DE CADA SERVICIO POR LA CANTIDAD DE AMBIENTES ELEGIDOS, Y A LA VEZ SE CALCULA UN DESC QUE SE MUESTRA UNICAMENTE SI SE APLICA EL CODIGO CORRECTO
 
 addEventListener('load',inicio,false);
 
@@ -251,6 +332,7 @@ document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" cl
 
 
 
+
 }else if (checkedFlete && checkedPintura && !checkedInteriores ){
 document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " +  (flete[1] + pintura[1]) +  '</p>';
 document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2])) +'</p>';
@@ -289,53 +371,12 @@ document.getElementById("mostrar-total3").innerHTML = '<p id="mostrar-total3" cl
 
 aplicarDescuento();
 
-//  if (codigoDesc == "MOOD20") {
-  
-// aplicarDescuento();
-
-// if(codigoDesc == "MOOD20" && checkedFlete && !checkedPintura && !checkedInteriores ){ 
-
-// aplicarDescuento();
-
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " SUBTOTAL: $ " + flete[1] + "- 20% OFF" +'</p>';
-// document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + " TOTAL: $ " + (flete[1] - ((flete[1] * 20) / 100)) + '</p>';
-// // document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + flete[1] +'</p>';
-
-// }else if (codigoDesc != "MOOD20" && checkedFlete && !checkedPintura && !checkedInteriores ) {
-
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + flete[1] +'</p>';
-// document.getElementById("mostrar-total2").display = 'none';
-
-
-
-// } 
-
-// if (checkedFlete && checkedPintura && !checkedInteriores ){
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " +  (flete[1] + (pintura[1] * value)) +  '</p>';
-
-
-// }else if (checkedFlete && checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1]  + (pintura[1] + interiores[1]) * value) + '</p>';
-
-
-// }else if (checkedFlete && !checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((flete[1]) + (interiores[1] * value)) + '</p>';
-
-// }else if (!checkedFlete && checkedPintura && !checkedInteriores) {
-
-  
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (pintura[1] * value) + '</p>';
-
-// }else if (!checkedFlete && checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((pintura[1] + interiores[1]) * value) + '</p>';
-
-// }else if (!checkedFlete && !checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (interiores[1] * value) + '</p>';
-// } 
 
 
 }
 
+
+//EN ESTA FUNCION SE VALIDA EL CUPON DE DESCUENTO CON UN UNICO CODIGO VALIDO, DE SER CORRECTO TE MUESTRA LOS DESCUENTOS APLICADOS, DE LO CONTRARIO LOS OCULTA.
 
 function aplicarDescuento(){
 
@@ -363,6 +404,8 @@ mostrarTotalDesc.style.display = 'none';
 }
 
 
+//EN ESTA FUNCION SE VALIDA LA VISIBILIDAD DEL INPUT Y EL BOTON PARA ESCRIBIR EL CODIGO DE DESCUENTO.
+
 function mostrarInput() {
         element = document.getElementById("content");
         check = document.getElementById("toogle4");
@@ -371,6 +414,9 @@ mostrarTotalDesc = document.getElementById("mostrar-total3");
 elementoError = document.getElementById("wrongCod");
         if (check.checked) {
             element.style.display='block';
+            elementoError.style.display='none';
+            mostrarDesc.style.display = 'block';
+mostrarTotalDesc.style.display = 'block';
         }
         else {
             element.style.display='none';
@@ -381,78 +427,6 @@ mostrarTotalDesc.style.display = 'none';
 
         }
     }
-
-
- 
-
-
-
-// document.getElementById('ambientes').innerHTML=document.getElementById('ambiente').value;
-
-
-
-// if (checkedFlete && !checkedPintura && !checkedInteriores && codigoDesc == "MOOD20") {
-
-  
-
-//   element.style.display='block';
-// elementoError.style.display='none';
-// cambioAmbientes();
-// }else{
-
-
-// elementoError.style.display='block';
-// element.style.display='none';
-// cambioAmbientes();
-// }
-
-
-
-// var checkedFlete = checkboxFlete.checked;
-//   var checkedPintura = checkboxPintura.checked;
-//    var checkedInteriores = checkboxInteriores.checked;
-// if(checkedFlete && !checkedPintura && !checkedInteriores && codigoDesc == "MOOD20"){ 
-  
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " SUBTOTAL: $ " + flete[1] + "- 20% OFF" +'</p>';
-// document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + " TOTAL: $ " + (flete[1] - ((flete[1] * 20) / 100)) + '</p>';
-// element.style.display='block';
-// elementoError.style.display='none';
-// }else{
-  
-
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + flete[1] + '</p>';
-// document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "  " + '</p>';
-// elementoError.style.display='block';
-// element.style.display='none';
-// }
-// if (checkedFlete && checkedPintura && !checkedInteriores && codigoDesc == "MOOD20"){
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " SUBTOTAL: $ " + (flete[1] + (pintura[1] * value)) + "- 20% OFF" + '</p>';
-// document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + " TOTAL: $ " + ((flete[1] + (pintura[1] * value)) - (((flete[1] + (pintura[1] * value)) * 20) / 100)) + '</p>';
-// element.style.display='block';
-// elementoError.style.display='none';
-// }else{
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1] + (pintura[1] * value)) + '</p>';
-// document.getElementById("mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "  " + '</p>';
-// elementoError.style.display='block';
-// element.style.display='none';
-// }
-
-// if (checkedFlete && checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1]  + (pintura[1] + interiores[1]) * value) + '</p>';
-
-
-// }else if (checkedFlete && !checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((flete[1]) + (interiores[1] * value)) + '</p>';
-
-// }else if (!checkedFlete && checkedPintura && !checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (pintura[1] * value) + '</p>';
-
-// }else if (!checkedFlete && checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + ((pintura[1] + interiores[1]) * value) + '</p>';
-
-// }else if (!checkedFlete && !checkedPintura && checkedInteriores) {
-// document.getElementById("mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (interiores[1] * value) + '</p>';
-// } 
 
 
 
@@ -483,7 +457,7 @@ var valorBasic = (valorFlete);
 
 
 
-console.log(pintura[3])
+// EN ESTA FUNCION SE VALIDAN LOS CHECKBOX DE LOS SERVICIOS
 
 var checkboxFlete = document.getElementById('toogle');
 checkboxFlete.addEventListener("change", validaCheckbox, false);
@@ -500,6 +474,7 @@ function validaCheckbox()
    var checkedInteriores = checkboxInteriores.checked;
   if(checkedFlete && !checkedPintura && !checkedInteriores){
     mostrarPlanBasic();
+
   }else if (checkedFlete && checkedPintura && !checkedInteriores) {
   	mostrarPlanRegular();
   }else if (checkedFlete && checkedPintura && checkedInteriores) {
