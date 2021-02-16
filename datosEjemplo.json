@@ -1,8 +1,17 @@
 
 
 
-var ejemplo = {
-    "nombre":"Jose",
-    "mail":"juncalcf@gmail.com",
-    "edad":31,
-   };
+var datosEjemplo = `{
+
+"usuario":"admin",
+"contrasena":"admin",
+"email":"admin@gmail.com",
+"genero":"Masculino",
+"nombre":"admin",
+"dni":"34537647",
+"domicilio":"Craig 882",
+"localidad":"CABA",
+"telefono":"1530540430"
+
+};
+

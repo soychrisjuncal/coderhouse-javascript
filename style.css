@@ -44,8 +44,9 @@ align-items: right;
 
 	#menus {
 
-margin: 0px 20px 0px 20px;
+margin: 0px;
 justify-content: flex-end;
+display: inline-flex;
 width: 100%;
 
 
