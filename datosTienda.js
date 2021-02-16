@@ -1,7 +1,7 @@
 
-$( document ).ready(function() {
-    $('#myModal').modal('toggle')
-});
+// $( document ).ready(function() {
+//     $('#myModal').modal('toggle')
+// });
 
 
 // ESTA FUNCION CAPTURA EL REGISTRO DEL USUARIO.
@@ -462,9 +462,9 @@ JSON.parse(localStorage.getItem("Servicios7"))
 JSON.parse(sessionStorage.getItem("Servicios7"))
 
 
-$("tarjeta-text").html ( '<p id="tarjeta-text" class="tarjeta-text"> - <del> '  +  flete[0] + '<del> </p>');;
-$("tarjeta-text2").html ( '  <p class="card-text2"> - <del>  ' + pintura[0] + ' <del> </p>');
-$("tarjeta-text3").html ( ' <p class="card-text3"> ' + interiores[0] + '</p>');
+$("#tarjeta-text").html ( '<p id="tarjeta-text" class="tarjeta-text"> - <del> '  +  flete[0] + '<del> </p>');;
+$("#tarjeta-text2").html ( '  <p class="card-text2"> - <del>  ' + pintura[0] + ' <del> </p>');
+$("#tarjeta-text3").html ( ' <p class="card-text3"> ' + interiores[0] + '</p>');
 value =parseInt($('#ambiente').val());
 
 cambioAmbientes();
@@ -498,10 +498,10 @@ JSON.parse(localStorage.getItem("Servicios8"))
 JSON.parse(sessionStorage.getItem("Servicios8"))
 
 
-$("tarjeta-text").html ('<p id="tarjeta-text" class="tarjeta-text">  </p>');
-$("tarjeta-text2").html ( '  <p class="card-text2"> </p>');
-$("tarjeta-text3").html ( ' <p class="card-text3"> </p>');
-$("mostrar-total1").html ('<p id="mostrar-total1" class="tarjeta-text4">' + "  " + '</p>');
+$("#tarjeta-text").html ('<p id="tarjeta-text" class="tarjeta-text">' + "  " +'  </p>');
+$("#tarjeta-text2").html ( '  <p class="card-text2">' + "  " +' </p>');
+$("#tarjeta-text3").html ( ' <p class="card-text3">' + "  " +' </p>');
+$("#mostrar-total1").html ('<p id="mostrar-total1" class="tarjeta-text4">' + "  " + '</p>');
 
 
 cambioAmbientes();
@@ -591,7 +591,7 @@ document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + pintura[3]+ interiores[3]) +'</label>';
 
 }else if (checkedFlete && !checkedPintura && checkedInteriores) {
-document.querySelector("#mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (flete[1]) + interiores[1] + '</p>';
+document.querySelector("#mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + parseInt(flete[1] + interiores[1]) + '</p>';
 document.querySelector("#mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((flete[2] + interiores[2])) +'</p>';
 document.querySelector("#mostrar-total3").innerHTML = '<p id="mostrar-total3" class="tarjeta-text6">' + "TOTAL $ " + parseInt(flete[3] + interiores[3]) +'</p>';
 
