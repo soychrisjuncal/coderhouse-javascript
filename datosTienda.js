@@ -1,33 +1,179 @@
 
-// $( document ).ready(function() {
+$( document ).ready(function() {
+
+  $('#formulario').hide();
 //     $('#myModal').modal('toggle')
-// });
+});
+
+
+// e.preventDefault(); //Sirve para frenar la propagación del click en un (recargar pagina)
+   
+    // $('html, body').animate({
+    //     scrollTop: $("#saludoUsuario").offset().top  
+    // }, 1000);
+
+
+
+document.querySelector('#registroToggle').addEventListener('click', mostrarForm);
+function mostrarForm(e){
+  e.preventDefault();
+  $('#formulario').fadeToggle();
+
+
+}
+//VALIDACION DE INPUTS DE REGISTRO
+
+const formulario = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario input');
+
+const expresiones = {
+  usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+  password: /^.{4,12}$/, // 4 a 12 digitos.
+  correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  telefono: /^\d{7,14}$/, // 7 a 14 numeros.
+  domicilio: /^[a-zA-Z0-9\s]{1,40}$/, // Letras y espacios, numeros.
+  localidad: /^[a-zA-Z0-9\s]{1,40}$/ // Letras y espacios, numeros.
+}
+
+const campos = {
+  usuario: false,
+  nombre: false,
+  password: false,
+  correo: false,
+  telefono: false,
+  domicilio: false,
+  localidad: false
+}
+
+const validarFormulario = (e) => {
+  switch (e.target.name) {
+    case "usuario":
+      validarCampo(expresiones.usuario, e.target, 'usuario');
+    break;
+    case "nombre":
+      validarCampo(expresiones.nombre, e.target, 'nombre');
+    break;
+    case "password":
+      validarCampo(expresiones.password, e.target, 'password');
+      validarPassword2();
+    break;
+    case "password2":
+      validarPassword2();
+    break;
+    case "correo":
+      validarCampo(expresiones.correo, e.target, 'correo');
+    break;
+    case "telefono":
+      validarCampo(expresiones.telefono, e.target, 'telefono');
+    break;
+    case "domicilio":
+      validarCampo(expresiones.domicilio, e.target, 'domicilio');
+    break;
+    case "localidad":
+      validarCampo(expresiones.localidad, e.target, 'localidad');
+    break;
+  }
+}
+
+const validarCampo = (expresion, input, campo) => {
+  if(expresion.test(input.value)){
+    document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
+    document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
+    document.querySelector(`#grupo__${campo} i`).classList.add('fa-check-circle');
+    document.querySelector(`#grupo__${campo} i`).classList.remove('fa-times-circle');
+    document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
+    campos[campo] = true;
+  } else {
+    document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
+    document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+    document.querySelector(`#grupo__${campo} i`).classList.add('fa-times-circle');
+    document.querySelector(`#grupo__${campo} i`).classList.remove('fa-check-circle');
+    document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
+    campos[campo] = false;
+  }
+}
+
+const validarPassword2 = () => {
+  const inputPassword1 = document.getElementById('password');
+  const inputPassword2 = document.getElementById('password2');
+
+  if(inputPassword1.value !== inputPassword2.value){
+    document.getElementById(`grupo__password2`).classList.add('formulario__grupo-incorrecto');
+    document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-correcto');
+    document.querySelector(`#grupo__password2 i`).classList.add('fa-times-circle');
+    document.querySelector(`#grupo__password2 i`).classList.remove('fa-check-circle');
+    document.querySelector(`#grupo__password2 .formulario__input-error`).classList.add('formulario__input-error-activo');
+    campos['password'] = false;
+  } else {
+    document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
+    document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
+    document.querySelector(`#grupo__password2 i`).classList.remove('fa-times-circle');
+    document.querySelector(`#grupo__password2 i`).classList.add('fa-check-circle');
+    document.querySelector(`#grupo__password2 .formulario__input-error`).classList.remove('formulario__input-error-activo');
+    campos['password'] = true;
+  }
+}
+
+inputs.forEach((input) => {
+  input.addEventListener('keyup', validarFormulario);
+  input.addEventListener('blur', validarFormulario);
+});
+
+formulario.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const terminos = document.getElementById('terminos');
+  if(campos.usuario && campos.nombre && campos.password && campos.correo && campos.telefono && campos.domicilio && campos.localidad && terminos.checked ){
+  
+capturar();
+    
+
+    document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+    setTimeout(() => {
+      document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+    }, 5000);
+
+    document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+      icono.classList.remove('formulario__grupo-correcto');
+
+  formulario.reset();
+  location.reload();
+
+    });
+  } else {
+    document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+  }
+});
+
 
 
 // ESTA FUNCION CAPTURA EL REGISTRO DEL USUARIO.
-document.querySelector('#botonCaptura').addEventListener('click', capturar)
+// document.querySelector('#formulario__btn').addEventListener('click', capturar)
 function capturar () {
+
 // console.log(e);
 
 //FUNCION CONSTRUCTORA DE UN OBJETO PERSONA PARA CREAR USUARIOS
 
-function Persona (usuario,contrasena,email,genero,nombre,dni,domicilio,localidad,telefono) {
+function Persona (usuario,nombre,password,correo,telefono,domicilio,localidad) {
 
 this.usuario= usuario;
-this.contrasena= contrasena;
-this.email= email;
-this.genero= genero;
 this.nombre= nombre;
-this.dni = dni;
-this.domicilio= domicilio;
-this.localidad= localidad;
+this.password= password;
+
+this.correo = correo;
 this.telefono= telefono;
+this.domicilio = domicilio;
+this.localidad= localidad;
+
 }
 
 // var usuarioCapturar = document.getElementById("usuario").value;
-var usuarioCapturar = $("#usuario").val();
+var usuario = $("#usuario").val();
+var nombre = $("#nombre").val();
 //console.log(nombreCapturar);
-var contrasenaCapturar = $("#pass").val();
+var password = $("#password").val();
 // var contrasenaCapturar = document.getElementById("pass").value;
 //console.log(nombreCapturar);
 // var emailCapturar = document.getElementById("email").value;
@@ -45,15 +191,17 @@ var contrasenaCapturar = $("#pass").val();
 // var telefonoCapturar = document.getElementById("telefono").value;
 // //console.log(nombreCapturar);
 
-var emailCapturar = $("#email").val();
-var generoCapturar = $("#genero").val();
-var nombreCapturar = $("#nombre").val();
-var dniCapturar = $("#dni").val();
-var domicilioCapturar = $("#domicilio").val();
-var localidadCapturar = $("#localidad").val();
-var telefonoCapturar = $("#telefono").val();
+var correo = $("#correo").val();
+// var generoCapturar = $("#genero").val();
 
-nuevoUsuario = new Persona(usuarioCapturar,contrasenaCapturar,emailCapturar,generoCapturar,nombreCapturar,dniCapturar,domicilioCapturar,localidadCapturar,telefonoCapturar);
+// var dniCapturar = $("#dni").val();
+// var domicilioCapturar = $("#domicilio").val();
+// var localidadCapturar = $("#localidad").val();
+var telefono = $("#telefono").val();
+var domicilio = $("#domicilio").val();
+var localidad = $("#localidad").val();
+
+nuevoUsuario = new Persona(usuario,nombre,password,correo,telefono,domicilio,localidad);
 
 // console.log(nuevoUsuario);
 ingresarDato();
@@ -87,19 +235,22 @@ if ( !localStorage.getItem("Usuario", JSON.stringify('Usuario'))) {
 var mostrarRegistro= $("#registro")[0];
 mostrarRegistro.style.display='block';
 
+  $("#formulario").show();
+
 var saludoUsuario= $("#saludoUsuario")[0];
 saludoUsuario.style.display='none';
 
+// MENU USUARIO EN EL DOM EN CASO DE NO HABER INICIADO SESION.
 
 const menuContenedor = document.querySelector('#contenedorMenu')
 
   let div = document.createElement('div')
   div.classList.add('dropdown-menu')
-    div.innerHTML = ` <form class="px-4 py-3">
+    div.innerHTML = ` <form id="forMenu"  class="px-4 py-3">
 
 
     <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Email address</label>
+      <label for="exampleDropdownFormEmail1">Nombre de Usuario</label>
       <input id="usuarioLogin" type="text" name="username" class="form-control" placeholder="Nombre de Usuario o Mail">
     </div>
     <div class="form-group">
@@ -123,6 +274,8 @@ console.log("pepe");
       var mostrarRegistro= $("#registro")[0];
 mostrarRegistro.style.display='none';
 
+ $("#formulario").hide();
+
 var saludoUsuario= $("#saludoUsuario")[0];
 saludoUsuario.style.display='block';
 
@@ -133,23 +286,23 @@ $("#saludoUsuario").html('<p id="saludoUsuario" >' + "Bienvenid@  " +  JSON.pars
 $("#dropdownMenu2").html('<button class="btn btn-secondary bg-none" type="button" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false"> <img id="logoUsuario" src="img/logoUsuario.png">' + JSON.parse(localStorage.getItem("Usuario")).nombre + '</button>'
  )  
 
+// MENU USUARIO EN EL DOM EN CASO DE SI HABER INICIADO SESION.
 
  const menuContenedor = document.querySelector('#contenedorMenu')
 
   let div = document.createElement('div')
   div.classList.add('dropdown-menu')
-    div.innerHTML = ` <form class="px-4 py-3">
+    div.innerHTML = ` <form id="forMenu" class="px-4 py-3" >
 
     <div class="form-group">
-      <h2>Conectad@</h2>
+      <h2 class="forMenu_h2">Conectad@<i id="iconON" class="fas fa-dot-circle"></i></h2>
     </div>
+    <hr>
     <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Nombre</label>
-      <p>${JSON.parse(localStorage.getItem("Usuario")).usuario }</p>
+      <label  for="exampleDropdownFormEmail1">Nombre</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).nombre }</p>
     </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormPassword1">Mail</label>
-      <p>${JSON.parse(localStorage.getItem("Usuario")).usuario }</p>
+     <hr>
     </div>
      <div class="form-group">
       <label id="planLogin" for="exampleDropdownFormPassword1">Servicio Elegido</label>
@@ -157,24 +310,136 @@ $("#dropdownMenu2").html('<button class="btn btn-secondary bg-none" type="button
     </div>
 
     <div class="form-group">
-      <label id="totalLogin" for="exampleDropdownFormPassword1">Total</label>
+      <label id="totalLogin" for="exampleDropdownFormPassword1"  >Total</label>
       <p></p>
     </div>
        <div class="form-group">
-      <label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.</label>
+      <label id="totalDescLogin" for="exampleDropdownFormPassword1"style="display: none;">Desc.</label>
       <p></p>
     </div>
+    <hr>
         <div class="form-group">
-      <label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>
+      <label id="totalFinalLogin" for="exampleDropdownFormPassword1"style="display: none;">Precio Final</label>
       <p></p>
     </div>
-<button id="btnCerrar" type="submit" class="btn btn-primary": none;"> CERRAR SESION </button>
+<button id="btnCerrar" type="submit" class="btn btn-primary"> CERRAR SESION </button>
     <button type="submit" class="btn btn-primary" style="display: none;">LOGUEATE</button>
   </form>
   <div class="dropdown-divider"></div>
   <a class="dropdown-item" href="#" style="display: none;>Eres Nuevo? REGISTRATE</a>
  `
 menuContenedor.appendChild(div)
+
+
+document.querySelector('#dropdownMenu2').addEventListener('click', mostrarMenu);
+function mostrarMenu(e){
+
+   // get the clicked element
+  $clicked = $(e.currentTarget);
+  // if the clicked element is not a descendent of the dropdown
+  if ($clicked.closest('.dropdown').length === 0) {
+    // close the dropdown
+    $('.dropdown-menu').removeClass('open');
+     $('.dropdown-menu').slideToggle();
+//   }else{
+
+  
+//   $('.dropdown-menu').slideToggle();
+
+}
+}
+
+
+//FORMULARIO DE RESUMEN DE COMPRA QUE SOLO SE MUESTRA SI SE INICIO SESION.
+
+const modalContenedor = document.querySelector('#contenedor-modalFinalizar')
+
+  let div2 = document.createElement('div')
+  div2.classList.add('.finalizarModal')
+    div2.innerHTML = ` 
+<div class="modal fade" id="finalizarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+  <div id="modalFinalizar" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center">
+        <h5 class="modal-title" id="exampleModalLabel d-flex justify-content-center ">Resumen de Compra</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+      
+        <img class="imgResumen" src="img/resumenCompra.png">
+         
+    <div class="resumen-group">
+      <label>Usuario:</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).usuario }</p>
+    </div>
+    <div class="resumen-group">
+      <label>Mail:</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).correo }</p>
+    </div>
+
+    <div class="resumen-group">
+      <label>Nombre:</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).nombre }</p>
+    </div>
+
+    <div class="resumen-group">
+      <label>Domicilio:</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).domicilio }</p>
+    </div>
+  <div class="resumen-group">
+      <label>Localidad:</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).localidad }</p>
+      
+    </div>
+
+    <div class="resumen-group">
+      <label>telefono:</label>
+      <p>${JSON.parse(localStorage.getItem("Usuario")).telefono }</p>
+    </div>
+
+     <div class="resumen-group">
+      <label >Fecha a realizar los Servicios</label>
+      <input style="display:block; margin:0 auto;" type="date" id="fecha" name="fecha">
+    </div>
+
+     <div class="resumen-group">
+      <label id="planCompra">Servicio Elegido</label>
+      <p></p>
+    </div>
+
+    <div class="resumen-group">
+      <label id="totalCompra">Total</label>
+      <p></p>
+    </div>
+       <div class="resumen-group">
+      <label id="totalDescCompra">Desc.</label>
+      <p></p>
+    </div>
+        <div class="resumen-group">
+      <label id="totalFinalCompra">Precio Final</label>
+      <p></p>
+    </div>
+
+
+
+
+      </div>
+      <div class="modal-footer justify-content-center" >
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+        <button type="button" id="botonConfirmarCompra" class="btn btn-primary" type="reset">Finalizar Compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> `
+
+
+modalContenedor.appendChild(div2);
 
 var usuarioUsuario = JSON.parse(localStorage.getItem("Usuario")).usuario;
 var passUsuario = JSON.parse(localStorage.getItem("Usuario")).contrasena;
@@ -185,6 +450,114 @@ var passUsuario = JSON.parse(localStorage.getItem("Usuario")).contrasena;
 
  }
 
+ // MENSAJE ERROR EN CASO DE NO HABER INICIADO SESION A LA HORA DE QUERER FINALIZAR LA COMPRA.
+
+document.querySelector('#btnFInalizar').addEventListener('click', finalizarCompra);
+function finalizarCompra () {
+
+if ( !localStorage.getItem("Usuario", JSON.stringify('Usuario'))) {
+
+  alert("No estas registrado");
+
+  $("#finalizarCompra").hide();
+}
+}
+
+
+// }else{
+
+// const modalContenedor = document.querySelector('#contenedor-modalFinalizar')
+
+//   let div = document.createElement('div')
+//   div.classList.add('.finalizarModal')
+//     div.innerHTML = ` 
+// <div class="modal fade" id="finalizarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+//   <div class="modal-dialog">
+//     <div class="modal-content">
+//       <div class="modal-header">
+//         <h5 class="modal-title" id="exampleModalLabel">Resumen de Compra</h5>
+//         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//           <span aria-hidden="true">&times;</span>
+//         </button>
+//       </div>
+//       <div class="modal-body">
+        
+//     <div class="form-group">
+//       <label>Usuario</label>
+//       <p>${JSON.parse(localStorage.getItem("Usuario")).usuario }</p>
+//     </div>
+//     <div class="form-group">
+//       <label>Mail</label>
+//       <p>${JSON.parse(localStorage.getItem("Usuario")).correo }</p>
+//     </div>
+
+//     <div class="form-group">
+//       <label>Nombre</label>
+//       <p>${JSON.parse(localStorage.getItem("Usuario")).nombre }</p>
+//     </div>
+
+//     <div class="form-group">
+//       <label>Domicilio</label>
+//       <p>${JSON.parse(localStorage.getItem("Usuario")).domicilio }</p>
+//     </div>
+//   <div class="form-group">
+//       <label>localidad</label>
+//       <p>${JSON.parse(localStorage.getItem("Usuario")).localidad }</p>
+//     </div>
+
+//     <div class="form-group">
+//       <label>telefono</label>
+//       <p>${JSON.parse(localStorage.getItem("Usuario")).telefono }</p>
+//     </div>
+
+//      <div class="form-group">
+//       <label>Fecha a realizar los Servicios</label>
+//       <input type="date" id="fecha" name="fecha">
+//     </div>
+
+//      <div class="form-group">
+//       <label id="planCompra">Servicio Elegido</label>
+//       <p></p>
+//     </div>
+
+//     <div class="form-group">
+//       <label id="totalCompra">Total</label>
+//       <p></p>
+//     </div>
+//        <div class="form-group">
+//       <label id="totalDescCompra">Desc.</label>
+//       <p></p>
+//     </div>
+//         <div class="form-group">
+//       <label id="totalFinalCompra">Precio Final</label>
+//       <p></p>
+//     </div>
+
+
+
+
+
+//       </div>
+//       <div class="modal-footer">
+//         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+//         <button type="button" id="botonSesion" class="btn btn-primary" type="reset">Finalizar Compra</button>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+// </div> `
+
+
+// modalContenedor.appendChild(div)
+
+// var usuarioUsuario = JSON.parse(localStorage.getItem("Usuario")).usuario;
+// var correoUsuario = JSON.parse(localStorage.getItem("Usuario")).correo;
+
+// cambioAmbientes();
+
+// }
+
+// }
 
 //FUNCION PARA INGRESAR POR LOGIN, SE PUEDE INGRESAR A TRAVES DEL SESSION STORAGE REGISTRADO O A TRAVES DEL USUARIO ADMIN.
 
@@ -269,8 +642,20 @@ var interiores = ["Diseño Interiores", valorInteriores, valorDescInteriores, va
 baseDatosServicios = [];
 
 
-document.querySelector('#btnBasic').addEventListener('click', mostrarPlanBasic)
+document.querySelector('#btnBasic').addEventListener('click', mostrarPlanBasic, function(event){
+  event.preventDefault()
+});
 function mostrarPlanBasic() {
+
+; //Sirve para frenar la propagación del click en un (recargar pagina)
+   
+  
+    $('html, body').animate({
+        scrollTop: $("#card-Resumen").offset().top  
+    }, 1000);
+
+
+
 
 // document.getElementById("toogle").checked = true; document.getElementById("toogle2").checked = false; document.getElementById("toogle3").checked = false;
 var arraysPlanBasic = [document.querySelector("#toogle").checked = true , document.querySelector("#toogle2").checked = false , document.querySelector("#toogle3").checked = false ]
@@ -280,6 +665,8 @@ localStorage.setItem("Servicios1", JSON.stringify(arraysPlanBasic));
 sessionStorage.setItem("Servicios1", JSON.stringify(arraysPlanBasic));
 JSON.parse(localStorage.getItem("Servicios1"))
 JSON.parse(sessionStorage.getItem("Servicios1"))
+
+
 
 $("#tarjeta-text").html ( '<p id="tarjeta-text" class="tarjeta-text">' +  flete[0] + '</p>');
 $("#tarjeta-text2").html ( '  <p class="card-text2"> - <del>' + pintura[0] + '</del></p>');
@@ -295,8 +682,14 @@ inicio();
 
 
 
-document.querySelector('#btnRegular').addEventListener('click', mostrarPlanRegular)
+document.querySelector('#btnRegular').addEventListener('click', mostrarPlanRegular, function(event){
+  event.preventDefault()
+});
 function mostrarPlanRegular() {
+
+  $('html, body').animate({
+        scrollTop: $("#card-Resumen").offset().top  
+    }, 1000);
 
 var arraysPlanRegular = [document.querySelector("#toogle").checked = true , document.querySelector("#toogle2").checked = true , document.querySelector("#toogle3").checked = false ]
 baseDatosServicios.push(arraysPlanRegular);
@@ -321,8 +714,14 @@ inicio();
 
 }
 
-document.querySelector('#btnFull').addEventListener('click', mostrarPlanFull)
+document.querySelector('#btnFull').addEventListener('click', mostrarPlanFull, function(event){
+  event.preventDefault()
+});
 function mostrarPlanFull() {
+
+  $('html, body').animate({
+        scrollTop: $("#card-Resumen").offset().top  
+    }, 1000);
 
 
 var arraysPlanFull = [document.querySelector("#toogle").checked = true , document.querySelector("#toogle2").checked = true , document.querySelector("#toogle3").checked = true ]
@@ -526,6 +925,7 @@ addEventListener('load',inicio,false);
   {    
     document.querySelector('#ambientes').innerHTML=document.querySelector('#ambiente').value;
 
+
   value = parseInt(document.querySelector('#ambiente').value);
 
 var valorFlete = 7999;
@@ -565,7 +965,11 @@ document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="e
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + flete[2] +'</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + flete[3] +'</label>';
 
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra">Servicio Elegido: ' + '  ' +  '  Plan Basic ' + '</label>';
 
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra">Total' + " $ " + flete[1] +'</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + flete[2] +'</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + flete[3] +'</label>';
 
 
 }else if (checkedFlete && checkedPintura && !checkedInteriores ){
@@ -577,6 +981,12 @@ document.querySelector("#planLogin").innerHTML = '<label id="planLogin" for="exa
 document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="exampleDropdownFormPassword1">Total' + " $ " + (flete[1] + pintura[1]) +'</label>';
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2])) +'</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + pintura[3]) +'</label>';
+
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra">Servicio Elegido: ' + '  ' +  '  Plan Regular ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" ">Total' + " $ " + (flete[1] + pintura[1]) +'</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2])) +'</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + pintura[3]) +'</label>';
 
 
 }else if (checkedFlete && checkedPintura && checkedInteriores) {
@@ -590,6 +1000,12 @@ document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="e
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2]+ interiores[2])) +'</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + pintura[3]+ interiores[3]) +'</label>';
 
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra" for="exampleDropdownFormPassword1">Servicio Elegido: ' + '  ' +  '  Plan Full ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" for="exampleDropdownFormPassword1">Total' + " $ " + (flete[1]  + (pintura[1] + interiores[1])) +'</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt((flete[2] + pintura[2]+ interiores[2])) +'</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + pintura[3]+ interiores[3]) +'</label>';
+
 }else if (checkedFlete && !checkedPintura && checkedInteriores) {
 document.querySelector("#mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + parseInt(flete[1] + interiores[1]) + '</p>';
 document.querySelector("#mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt((flete[2] + interiores[2])) +'</p>';
@@ -600,6 +1016,12 @@ document.querySelector("#planLogin").innerHTML = '<label id="planLogin" for="exa
 document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="exampleDropdownFormPassword1">Total' + " $ " + (flete[1]) + interiores[1] + '</label>';
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt((flete[2] + interiores[2])) + '</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + interiores[3]) + '</label>';
+
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra" for="exampleDropdownFormPassword1">Servicio Elegido: ' + '  ' +  '  Plan Personalizado Flete + Interiores ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" for="exampleDropdownFormPassword1">Total' + " $ " + (flete[1]) + interiores[1] + '</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt((flete[2] + interiores[2])) + '</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(flete[3] + interiores[3]) + '</label>';
 
 }else if (!checkedFlete && checkedPintura && !checkedInteriores) {
   
@@ -613,6 +1035,12 @@ document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="e
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + pintura[2] + '</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + pintura[3]  + '</label>';
 
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra" for="exampleDropdownFormPassword1">Servicio Elegido: ' + '  ' +  '  Plan Personalizado Pintura ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" for="exampleDropdownFormPassword1">Total' + " $ " + pintura[1] + '</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + pintura[2] + '</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + pintura[3]  + '</label>';
+
 
 }else if (!checkedFlete && checkedPintura && checkedInteriores) {
 document.querySelector("#mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + (pintura[1] + interiores[1]) + '</p>';
@@ -625,6 +1053,12 @@ document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="e
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt(pintura[2] + interiores[2]) + '</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(pintura[3] + interiores[3]) + '</label>';
 
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra" for="exampleDropdownFormPassword1">Servicio Elegido: ' + '  ' +  '  Plan Personalizado Pintura + Interiores ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" for="exampleDropdownFormPassword1">Total' + " $ " + (pintura[1] + interiores[1]) + '</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt(pintura[2] + interiores[2]) + '</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(pintura[3] + interiores[3]) + '</label>';
+
 }else if (!checkedFlete && !checkedPintura && checkedInteriores) {
 document.querySelector("#mostrar-total1").innerHTML = '<p id="mostrar-total1" class="tarjeta-text4">' + " $ " + interiores[1] + '</p>';
 document.querySelector("#mostrar-total2").innerHTML = '<p id="mostrar-total2" class="tarjeta-text5">' + "- 20% OFF $ " + parseInt(interiores[2]) +'</p>';
@@ -636,6 +1070,12 @@ document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="e
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt(interiores[2]) + '</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(interiores[3]) + '</label>';
 
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra" for="exampleDropdownFormPassword1">Servicio Elegido: ' + '  ' +  '  Plan Personalizado Interiores ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" for="exampleDropdownFormPassword1">Total' + " $ " + interiores[1] + '</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + parseInt(interiores[2]) + '</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + parseInt(interiores[3]) + '</label>';
+
 }else {
 
 
@@ -644,6 +1084,12 @@ document.querySelector("#planLogin").innerHTML = '<label id="planLogin" for="exa
 document.querySelector("#totalLogin").innerHTML = '<label id="totalLogin" for="exampleDropdownFormPassword1">Total' + " $ " + '  ' +  '</label>';
 document.querySelector("#totalDescLogin").innerHTML = '<label id="totalDescLogin" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + '  ' +  '</label>';
 document.querySelector("#totalFinalLogin").innerHTML = '<label id="totalFinalLogin" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + '  ' +  '</label>';
+
+document.querySelector("#planCompra").innerHTML = '<label id="planCompra" for="exampleDropdownFormPassword1">Servicio Elegido: ' + '  ' +  '  ' + '</label>';
+
+document.querySelector("#totalCompra").innerHTML = '<label id="totalCompra" for="exampleDropdownFormPassword1">Total' + " $ " + '  ' +  '</label>';
+document.querySelector("#totalDescCompra").innerHTML = '<label id="totalDescCompra" for="exampleDropdownFormPassword1">Desc.' + "- 20% OFF $ " + '  ' +  '</label>';
+document.querySelector("#totalFinalCompra").innerHTML = '<label id="totalFinalCompra" for="exampleDropdownFormPassword1">Precio Final</label>' + " $ " + '  ' +  '</label>';
 
 } 
 
@@ -664,6 +1110,12 @@ var codigoDesc = document.querySelector("#desc").value;
 element = document.querySelector("#okCod");
 elementoError = document.querySelector("#wrongCod");
 
+mostrarTotalDescCompra = document.querySelector("#totalDescCompra")
+mostrarTotalFinalCompra = document.querySelector("#totalFinalCompra")
+
+mostrarTotalDescLogin = document.querySelector("#totalDescLogin")
+mostrarTotalFinalLogin = document.querySelector("#totalFinalLogin")
+
 mostrarDesc = document.querySelector("#mostrar-total2");
 mostrarTotalDesc = document.querySelector("#mostrar-total3");
 if (codigoDesc == "MOOD20") {
@@ -671,6 +1123,11 @@ element.style.display='block';
 elementoError.style.display='none';
 mostrarDesc.style.display = 'block';
 mostrarTotalDesc.style.display = 'block';
+mostrarTotalDescLogin.style.display = 'block';
+mostrarTotalFinalLogin.style.display = 'block';
+$('#totalDescCompra').show();
+$('#totalFinalCompra').show();
+
 
 }else{
 
@@ -679,6 +1136,10 @@ elementoError.style.display='block';
 element.style.display='none';
 mostrarDesc.style.display = 'none';
 mostrarTotalDesc.style.display = 'none';
+mostrarTotalDescLogin.style.display = 'none';
+mostrarTotalFinalLogin.style.display = 'none';
+$('#totalDescCompra').hide();
+$('#totalFinalCompra').hide();
 }
 }
 
@@ -686,19 +1147,20 @@ mostrarTotalDesc.style.display = 'none';
 //EN ESTA FUNCION SE VALIDA LA VISIBILIDAD DEL INPUT Y EL BOTON PARA ESCRIBIR EL CODIGO DE DESCUENTO.
 
 function mostrarInput() {
-        element = document.querySelector("#content");
+        element = $("#content");
         check = document.querySelector("#toogle4");
         mostrarDesc = document.querySelector("#mostrar-total2");
 mostrarTotalDesc = document.querySelector("#mostrar-total3");
 elementoError = document.querySelector("#wrongCod");
+
         if (check.checked) {
-            element.style.display='block';
+            $("#content").slideToggle();
             elementoError.style.display='none';
             mostrarDesc.style.display = 'none';
 mostrarTotalDesc.style.display = 'none';
         }
         else {
-            element.style.display='none';
+            $("#content").slideToggle();
             elementoError.style.display='none';
 
 mostrarDesc.style.display = 'none';
@@ -856,6 +1318,8 @@ localStorage.removeItem("Servicios7");
   mostrarNinguno();
 
 }
+
+
 
 
 // FUNCION PARA CERRAR SESION, UNA VEZ CERRADA BORRA EL LOCAL STORAGE MAS NO EL SESSION PARA VOLVER A INGRESAR.
