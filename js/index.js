@@ -2,20 +2,12 @@ window.sr = ScrollReveal();
 
 //PAGE INDEX
 
-	sr.reveal('.titulos', {
-
-		duration: 2300,
-		origin: 'right',
-		distance: '-100px'
-
-
-	})
 
 
 	sr.reveal('.imagen', {
 
-		duration: 2300,
-		origin: 'left',
+		duration: 2500,
+		origin: 'top',
 		distance: '-100px'
 
 
@@ -25,7 +17,7 @@ window.sr = ScrollReveal();
 	sr.reveal('.titulos2', {
 
 		duration: 2500,
-		origin: 'right',
+		origin: 'top',
 		distance: '-100px'
 
 
@@ -34,7 +26,7 @@ window.sr = ScrollReveal();
 		sr.reveal('.imagen2', {
 
 		duration: 2500,
-		origin: 'right',
+		origin: 'top',
 		distance: '-100px'
 
 
@@ -43,7 +35,7 @@ window.sr = ScrollReveal();
 		sr.reveal('.serviciosIndexTitulos', {
 
 		duration: 2500,
-		origin: 'left',
+		origin: 'right',
 		distance: '-100px'
 
 
@@ -69,3 +61,56 @@ window.sr = ScrollReveal();
 
 // PAGE PERSONALIZADO
 
+	
+		sr.reveal('.persoImagen1', {
+
+		duration: 2500,
+		origin: 'top',
+		distance: '-100px'
+
+
+	})
+
+
+		
+		sr.reveal('.flip-card', {
+
+		duration: 2500,
+		origin: 'top',
+		distance: '-100px'
+
+
+	})
+
+	
+
+		sr.reveal('.simuladorTitulo', {
+
+		duration: 2500,
+		origin: 'right',
+		distance: '-100px'
+
+
+	})
+
+		// PAGE CONTACTO
+
+		sr.reveal('.contactoImagen1', {
+
+		duration: 2500,
+		origin: 'top',
+		distance: '-100px'
+
+
+	})
+
+
+		
+		sr.reveal('.formularioContacto', {
+
+		duration: 2500,
+		origin: 'top',
+		distance: '-100px'
+
+
+	})

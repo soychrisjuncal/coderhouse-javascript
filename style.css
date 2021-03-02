@@ -49,6 +49,7 @@ align-items: center;
 
 display: inline-flex;
 width: 100%;
+background-color: #ff5544;
 
 
 
@@ -846,7 +847,7 @@ background-color: #f44336;
 
 #card-Resumen{
 
-	  width: 95%;
+	  width: 40rem;
   position: relative;
     max-width: 800px;
     margin: auto;
@@ -1049,7 +1050,7 @@ width: 70%;
 
 .formularioContacto__mensaje {
 	height: 45px;
-	line-height: 45px;
+	line-height: 0px;
 	background: #F66060;
 	padding: 0 15px;
 	border-radius: 3px;
@@ -1162,7 +1163,7 @@ width: 70%;
 .contenedor {
 
 	
-	background-image: url(img/backMobile.png);
+	background-image: url(img/mockupDesktopBody.png);
 
 	background-repeat: no-repeat;
 	background-size: 100% auto;
@@ -1186,15 +1187,88 @@ width: 70%;
 #navbar {
 
 	max-width: 767px;
+	width: 100%;
+
+	justify-self: center;
+    align-self: flex-start;
+    text-align: center;
+     margin-left: 0px;
+
+}
+
+	#menus {
+
+
+max-width: 767px;
+	width: 100%;
+
+	justify-self: center;
+    align-self: flex-start;
+    text-align: center;
+
+
+
+background-color: #ff5544;
+
+
+
 }
 
 
 
 	.header__logo {
 
+width: 75%;
 
-		width: 200px;
+	justify-self: center;
+    align-self: flex-start;
+    text-align: center;
+
+
 	}
+
+	#btn-burguer{
+
+		max-width: 767px;
+	width: 100%;
+
+	justify-self: center;
+    align-self: flex-start;
+    text-align: center;
+     margin-left: 0px;
+     border: none;
+
+	}
+
+	#dropdownMenu2 #logoUsuario{
+
+		max-width: 767px;
+	width: 50%;
+
+	justify-self: center;
+    align-self: flex-start;
+    text-align: center;
+     margin-left: 0px;
+     border: none;
+
+	}
+
+
+	.dropdown-menu.show {
+
+			max-width: 767px;
+	width: 100%;
+
+	justify-self: center;
+    align-self: flex-start;
+    text-align: center;
+     margin-left: 0px;
+     border: none;
+
+	}
+
+
+
 
 
 
@@ -1269,7 +1343,49 @@ footer {
 	/* PERSONALIZADO */
 
 
+.persoBloque1 {
 
+
+
+	max-width: 767px;
+	grid-area: seccion1;
+	justify-self: flex-start;
+	width: 100%;
+
+}
+
+.persoImagen1 {
+
+
+
+	max-width: 767px;
+	grid-area: seccion1;
+	justify-self: flex-start;
+	width: 100%;
+	
+}
+
+
+
+.persoBloque2 {
+
+
+
+	max-width: 767px;
+	grid-area: seccion1;
+	justify-self: flex-start;
+	width: 100%;
+
+}
+
+
+#card-Resumen {
+
+		max-width: 767px;
+	grid-area: seccion1;
+	justify-self: flex-start;
+	width: 20rem;
+}
 
 	.toogle-track {
 
@@ -1437,6 +1553,20 @@ footer {
 
 #toogle4 {
 	display: none;
+}
+
+/* CONTACTO */
+
+#formularioContacto {
+
+	max-width: 767px;
+	width: 100%;
+}
+
+#map {
+
+	max-width: 767px;
+	width: 100%;
 }
 
 }
