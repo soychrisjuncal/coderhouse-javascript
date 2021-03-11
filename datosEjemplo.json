@@ -1,8 +1,4 @@
-
-
-
 var datosEjemplo = `{
-
 "usuario":"admin",
 "contrasena":"admin",
 "email":"admin@gmail.com",
@@ -12,6 +8,5 @@ var datosEjemplo = `{
 "domicilio":"Craig 882",
 "localidad":"CABA",
 "telefono":"1530540430"
-
-};
+}`;
 

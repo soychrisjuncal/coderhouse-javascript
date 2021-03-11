@@ -1,7 +1,4 @@
-
-
 function iniciarMap(){
-
 	function localizacion(posicion){
 		var latitude = posicion.coords.latitude;
 		var longitude = posicion.coords.longitude;
@@ -15,11 +12,8 @@ function iniciarMap(){
 	      map: map
 	    });
 	}
-
 	function error(){
 		output.innerHTML = "<p>No se pudo obtener tu ubicación</p>";
-
 	}
 	navigator.geolocation.getCurrentPosition(localizacion,error);
-
 }
